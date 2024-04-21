@@ -1,5 +1,6 @@
 abcde 2.9.4-DEV
-
+ * Replace hardcoded "Various" in Various Artists handling by the new variable
+   DISKARTISTFILE
  -- Steve McIntyre <93sam@debian.org>  XXXXX
 
 abcde 2.9.3

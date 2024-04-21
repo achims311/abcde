@@ -574,6 +574,7 @@ do_replaygain()
 				TRACKFILE="$(mungetrackname "$TRACKNAME")"
 				ARTISTFILE="$(mungeartistname "$TRACKARTIST")"
 				ALBUMFILE="$(mungealbumname "$DALBUM")"
+				DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 				GENRE="$(mungegenre "$GENRE")"
 				YEAR=${CDYEAR:-$CDYEAR}
 				gettracknum
@@ -1677,13 +1678,14 @@ do_move ()
 		ALBUMFILE="$(mungealbumname "$DALBUM")"
 		ARTISTFILE="$(mungeartistname "$TRACKARTIST")"
 		TRACKFILE="$(mungetrackname "$TRACKNAME")"
+		DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 		GENRE="$(mungegenre "$GENRE")"
 		YEAR=${CDYEAR:-$CDYEAR}
 		# If we want to start the tracks with a given number, we need to modify
 		# the TRACKNUM value before evaluation
 		gettracknum
 		# Supported variables for OUTPUTFORMAT are GENRE, YEAR, ALBUMFILE,
-		# ARTISTFILE, TRACKFILE, and TRACKNUM.
+		# ARTISTFILE, DISKARTISTFILE, TRACKFILE, and TRACKNUM.
 		if [ "$ONETRACK" = "y" ]; then
 			if [ "$VARIOUSARTISTS" = "y" ]; then
 				OUTPUTFILE="$(eval echo \""$VAONETRACKOUTPUTFORMAT"\")"
@@ -1815,6 +1817,7 @@ do_playlist ()
 		for LASTTRACK in $TRACKQUEUE; do :; done
 		ALBUMFILE="$(mungealbumname "$DALBUM")"
 		ARTISTFILE="$(mungeartistname "$DARTIST")"
+		DISKARTISTFILE="${ARTISTFILE}"
 		GENRE="$(mungegenre "$GENRE")"
 		YEAR=${CDYEAR:-$CDYEAR}
 		if [ "$VARIOUSARTISTS" = "y" ] ; then
@@ -1856,6 +1859,7 @@ do_playlist ()
 				TRACKFILE="$(mungetrackname "$TRACKNAME")"
 				ARTISTFILE="$(mungeartistname "$TRACKARTIST")"
 				ALBUMFILE="$(mungealbumname "$DALBUM")"
+				DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 				# If we want to start the tracks with a given number, we need to modify the
 				# TRACKNUM value before evaluation
 				gettracknum
@@ -2015,6 +2019,7 @@ abcde.mkcue () {
 	TRACKFILE="$(mungetrackname "$TRACKNAME")"
 	ARTISTFILE="$(mungeartistname "$TRACKARTIST")"
 	ALBUMFILE="$(mungealbumname "$DALBUM")"
+	DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 	if [ "$ONETRACK" = "y" ]; then
 		if [ "$VARIOUSARTISTS" = "y" ]; then
 			CUEWAVFILE="$(eval echo \""$VAONETRACKOUTPUTFORMAT"\" | sed -e 's@^.*/@@').$OUTPUT"
@@ -2404,6 +2409,7 @@ do_cleancue()
 					TRACKFILE="$(mungetrackname "$TRACKNAME")"
 					ARTISTFILE="$(mungeartistname "$TRACKARTIST")"
 					ALBUMFILE="$(mungealbumname "$DALBUM")"
+					DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 
 					if [ "$VARIOUSARTISTS" = "y" ]; then
 						OUTPUTFILE="$(eval echo \""$VAONETRACKOUTPUTFORMAT"\" | sed -e 's@^.*/@@').$OUTPUT"
@@ -3216,6 +3222,7 @@ do_getalbumart()
 		# set variables
 		ALBUMFILE="$(mungealbumname "$DALBUM")"
 		ARTISTFILE="$(mungeartistname "$DARTIST")"
+		DISKARTISTFILE="${ARTISTFILE}"
 		GENRE="$(mungegenre "$GENRE")"
 		YEAR=${CDYEAR:-$CDYEAR}
 		# have we got a musicbrainz mbid or amazon asin?
@@ -3366,6 +3373,7 @@ do_embedalbumart()
 	# Set variables:
 	ALBUMFILE="$(mungealbumname "$DALBUM")"
 	ARTISTFILE="$(mungeartistname "$DARTIST")"
+	DISKARTISTFILE="$(mungeartistname "$DARTIST")"
 	GENRE="$(mungegenre "$GENRE")"
 	YEAR=${CDYEAR:-$CDYEAR}
 
@@ -3813,9 +3821,9 @@ CUEREADERSYNTAX=default
 OUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${TRACKFILE}'
 # Use the following VAOUTPUTFORMAT to revert to 2.0.x VA format:
 #VAOUTPUTFORMAT=${OUTPUTFORMAT}
-VAOUTPUTFORMAT='Various-${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
+VAOUTPUTFORMAT='${DISKARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
 ONETRACKOUTPUTFORMAT='${ARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}'
-VAONETRACKOUTPUTFORMAT='Various-${ALBUMFILE}/${ALBUMFILE}'
+VAONETRACKOUTPUTFORMAT='${DISKARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}'
 PLAYLISTFORMAT='${ARTISTFILE}-${ALBUMFILE}.${OUTPUT}.m3u'
 PLAYLISTDATAPREFIX=''
 VAPLAYLISTFORMAT='${ARTISTFILE}-${ALBUMFILE}.${OUTPUT}.m3u'

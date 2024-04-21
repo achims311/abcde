@@ -491,7 +491,7 @@ OUTPUTFORMAT='${OUTPUT}/${ARTISTFILE}/${ALBUMFILE}/${TRACKNUM}._${TRACKFILE}'
 .B OUTPUTFORMAT
 Specifies the format for completed Ogg/Vorbis, MP3, FLAC, Ogg/Speex, MPP/MP+
 (Musepack) or M4A filenames. Variables are included using standard shell
-syntax. Allowed variables are GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE,
+syntax. Allowed variables are GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, DISKARTISTFILE,
 TRACKNUM, and YEAR. Default is \'${ARTISTFILE}-${ALBUMFILE}/${TRACKNUM}-${TRACKFILE}\'.
 Make sure to use single quotes around this variable. TRACKNUM is automatically
 zero-padded, when the number of encoded tracks is higher than 9. When lower,
@@ -499,7 +499,7 @@ you can force with '\-p' in the command line.
 .TP
 .B VAOUTPUTFORMAT
 Just like OUTPUTFORMAT but for Various Artists discs. The default is
-\(aqVarious-${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
+\(aq${DISKARTISTFILE}-${ALBUMFILE}/${TRACKNUM}.${ARTISTFILE}-${TRACKFILE}'
 .TP
 .B ONETRACKOUTPUTFORMAT
 Just like OUTPUTFORMAT but for single-track rips (see option "\-1"). The default
@@ -507,7 +507,7 @@ is '${ARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}'
 .TP
 .B VAONETRACKOUTPUTFORMAT
 Just like ONETRACKOUTPUTFORMAT but for Various Artists discs. The default
-is 'Various-${ALBUMFILE}/${ALBUMFILE}'
+is '${DISKARTISTFILE}-${ALBUMFILE}/${ALBUMFILE}'
 .TP
 .B MAXPROCS
 Defines how many encoders to run at once. This makes for huge speedups
